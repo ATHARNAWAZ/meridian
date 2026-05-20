@@ -1,0 +1,110 @@
+{
+  "title": "Meridian Pipeline",
+  "uid": "meridian-pipeline",
+  "version": 1,
+  "schemaVersion": 38,
+  "refresh": "10s",
+  "time": {"from": "now-1h", "to": "now"},
+  "panels": [
+    {
+      "id": 1,
+      "title": "Fraud Alerts Total",
+      "type": "stat",
+      "gridPos": {"h": 4, "w": 4, "x": 0, "y": 0},
+      "targets": [
+        {
+          "expr": "sum(meridian_fraud_alerts_total)",
+          "legendFormat": "Total fraud alerts"
+        }
+      ],
+      "options": {"colorMode": "background", "graphMode": "area"},
+      "fieldConfig": {"defaults": {"thresholds": {"steps": [{"color": "green", "value": 0}, {"color": "yellow", "value": 10}, {"color": "red", "value": 50}]}}}
+    },
+    {
+      "id": 2,
+      "title": "Late Events Total",
+      "type": "stat",
+      "gridPos": {"h": 4, "w": 4, "x": 4, "y": 0},
+      "targets": [
+        {
+          "expr": "sum(meridian_late_events_total)",
+          "legendFormat": "Late events"
+        }
+      ],
+      "options": {"colorMode": "background", "graphMode": "area"},
+      "fieldConfig": {"defaults": {"thresholds": {"steps": [{"color": "green", "value": 0}, {"color": "orange", "value": 100}]}}}
+    },
+    {
+      "id": 3,
+      "title": "Windows Processed",
+      "type": "stat",
+      "gridPos": {"h": 4, "w": 4, "x": 8, "y": 0},
+      "targets": [
+        {
+          "expr": "sum(meridian_windows_processed_total)",
+          "legendFormat": "Windows"
+        }
+      ],
+      "options": {"colorMode": "value", "graphMode": "area"}
+    },
+    {
+      "id": 4,
+      "title": "Fraud Alerts Rate",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4},
+      "targets": [
+        {
+          "expr": "rate(meridian_fraud_alerts_total[5m])",
+          "legendFormat": "Fraud alerts/sec — {{pattern_type}}"
+        }
+      ],
+      "options": {"tooltip": {"mode": "multi"}},
+      "fieldConfig": {"defaults": {"color": {"mode": "palette-classic"}}}
+    },
+    {
+      "id": 5,
+      "title": "Late Events Rate",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4},
+      "targets": [
+        {
+          "expr": "rate(meridian_late_events_total[5m])",
+          "legendFormat": "Late events/sec"
+        },
+        {
+          "expr": "rate(meridian_late_events_by_minutes_bucket_total[5m])",
+          "legendFormat": "{{bucket}} late"
+        }
+      ],
+      "fieldConfig": {"defaults": {"color": {"mode": "palette-classic"}}}
+    },
+    {
+      "id": 6,
+      "title": "Flink Records Processed/sec",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 12},
+      "targets": [
+        {
+          "expr": "rate(flink_taskmanager_job_task_operator_numRecordsIn[1m])",
+          "legendFormat": "Records in/sec"
+        },
+        {
+          "expr": "rate(flink_taskmanager_job_task_operator_numRecordsOut[1m])",
+          "legendFormat": "Records out/sec"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Kafka Consumer Lag",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 12},
+      "targets": [
+        {
+          "expr": "sum by (topic, consumergroup) (kafka_consumer_group_lag)",
+          "legendFormat": "{{consumergroup}} / {{topic}}"
+        }
+      ]
+    }
+  ]
+}

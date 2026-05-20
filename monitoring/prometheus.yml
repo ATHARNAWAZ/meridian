@@ -1,0 +1,28 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  # Meridian custom metrics (producer + Flink jobs)
+  - job_name: meridian
+    static_configs:
+      - targets:
+          - "host.docker.internal:8888"   # metrics server (producer)
+          - "host.docker.internal:8889"   # fraud_detector Prometheus port
+          - "host.docker.internal:8890"   # late_event_handler Prometheus port
+          - "host.docker.internal:8891"   # inventory_alerts Prometheus port
+
+  # Flink built-in metrics
+  - job_name: flink
+    static_configs:
+      - targets:
+          - "flink-jobmanager:9249"
+          - "flink-taskmanager:9249"
+    metrics_path: /metrics
+
+  # Kafka via JMX exporter (if configured)
+  - job_name: kafka
+    static_configs:
+      - targets:
+          - "kafka:9308"
+    metrics_path: /metrics
