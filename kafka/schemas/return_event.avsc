@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "name": "ReturnEvent",
+  "namespace": "com.meridian.events",
+  "doc": "A product return request from a user",
+  "fields": [
+    {"name": "event_id",      "type": "string", "doc": "Unique event UUID"},
+    {"name": "order_id",      "type": "string", "doc": "Original order ID"},
+    {"name": "user_id",       "type": "string", "doc": "User requesting the return"},
+    {"name": "product_id",    "type": "string", "doc": "Product being returned"},
+    {"name": "reason",        "type": "string", "doc": "Return reason: DEFECTIVE, WRONG_ITEM, NOT_AS_DESCRIBED, CHANGED_MIND, OTHER"},
+    {"name": "refund_amount", "type": "double", "doc": "Refund amount to be issued"},
+    {"name": "event_ts",      "type": {"type": "long", "logicalType": "timestamp-millis"}, "doc": "Event timestamp in milliseconds since epoch"}
+  ]
+}

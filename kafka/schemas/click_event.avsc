@@ -1,0 +1,16 @@
+{
+  "type": "record",
+  "name": "ClickEvent",
+  "namespace": "com.meridian.events",
+  "doc": "A product page click by a user",
+  "fields": [
+    {"name": "event_id",    "type": "string", "doc": "Unique event UUID"},
+    {"name": "user_id",     "type": "string", "doc": "User who clicked"},
+    {"name": "product_id",  "type": "string", "doc": "Product page that was clicked"},
+    {"name": "page",        "type": "string", "doc": "Page path (e.g. /product/123)"},
+    {"name": "session_id",  "type": "string", "doc": "Browser session identifier"},
+    {"name": "referrer",    "type": ["null", "string"], "default": null, "doc": "Referring URL"},
+    {"name": "device_type", "type": "string", "doc": "Device type: mobile, desktop, tablet"},
+    {"name": "event_ts",    "type": {"type": "long", "logicalType": "timestamp-millis"}, "doc": "Event timestamp in milliseconds since epoch"}
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "record",
+  "name": "OrderEvent",
+  "namespace": "com.meridian.events",
+  "doc": "An e-commerce order placed by a user",
+  "fields": [
+    {"name": "event_id",   "type": "string",  "doc": "Unique event UUID"},
+    {"name": "user_id",    "type": "string",  "doc": "User who placed the order"},
+    {"name": "product_id", "type": "string",  "doc": "Product ordered"},
+    {"name": "category",   "type": "string",  "doc": "Product category"},
+    {"name": "amount",     "type": "double",  "doc": "Order amount in currency units"},
+    {"name": "quantity",   "type": "int",     "doc": "Number of units ordered"},
+    {"name": "currency",   "type": "string",  "default": "EUR", "doc": "ISO 4217 currency code"},
+    {"name": "country",    "type": "string",  "doc": "Buyer country (ISO 3166-1 alpha-2)"},
+    {"name": "event_ts",   "type": {"type": "long", "logicalType": "timestamp-millis"}, "doc": "Event timestamp in milliseconds since epoch"},
+    {"name": "is_fraud",   "type": "boolean", "default": false, "doc": "Fraud flag set by downstream detection"}
+  ]
+}

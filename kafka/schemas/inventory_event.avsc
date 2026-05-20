@@ -1,0 +1,16 @@
+{
+  "type": "record",
+  "name": "InventoryEvent",
+  "namespace": "com.meridian.events",
+  "doc": "An inventory stock level change at a warehouse",
+  "fields": [
+    {"name": "event_id",          "type": "string", "doc": "Unique event UUID"},
+    {"name": "product_id",        "type": "string", "doc": "Product whose stock changed"},
+    {"name": "warehouse_id",      "type": "string", "doc": "Warehouse identifier"},
+    {"name": "stock_level",       "type": "int",    "doc": "Absolute stock level after this event"},
+    {"name": "quantity_changed",  "type": "int",    "doc": "Delta: positive for restock, negative for depletion"},
+    {"name": "reorder_threshold", "type": "int",    "doc": "Reorder alert threshold for this product"},
+    {"name": "event_type",        "type": "string", "doc": "RESTOCK or DEPLETION"},
+    {"name": "event_ts",          "type": {"type": "long", "logicalType": "timestamp-millis"}, "doc": "Event timestamp in milliseconds since epoch"}
+  ]
+}

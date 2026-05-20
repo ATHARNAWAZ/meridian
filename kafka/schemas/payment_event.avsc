@@ -1,0 +1,17 @@
+{
+  "type": "record",
+  "name": "PaymentEvent",
+  "namespace": "com.meridian.events",
+  "doc": "A payment transaction linked to an order",
+  "fields": [
+    {"name": "event_id",        "type": "string", "doc": "Unique event UUID"},
+    {"name": "order_id",        "type": "string", "doc": "Order this payment relates to"},
+    {"name": "user_id",         "type": "string", "doc": "User who made the payment"},
+    {"name": "amount",          "type": "double", "doc": "Payment amount"},
+    {"name": "currency",        "type": "string", "default": "EUR", "doc": "ISO 4217 currency code"},
+    {"name": "payment_method",  "type": "string", "doc": "Payment method: card, paypal, sepa, klarna"},
+    {"name": "status",          "type": "string", "doc": "Payment status: PENDING, SUCCESS, FAILED, REFUNDED"},
+    {"name": "gateway",         "type": "string", "doc": "Payment gateway used"},
+    {"name": "event_ts",        "type": {"type": "long", "logicalType": "timestamp-millis"}, "doc": "Event timestamp in milliseconds since epoch"}
+  ]
+}
