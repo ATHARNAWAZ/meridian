@@ -1,0 +1,79 @@
+version: 2
+
+models:
+  - name: daily_revenue
+    description: "Daily revenue aggregated by category and country. Primary mart for revenue trend charts."
+    columns:
+      - name: daily_revenue_id
+        description: "Surrogate key (MD5 of order_date + category + country)"
+        data_tests:
+          - unique
+          - not_null
+      - name: order_date
+        description: "Calendar date"
+        data_tests:
+          - not_null
+      - name: category
+        description: "Product category"
+      - name: country
+        description: "Buyer country"
+      - name: order_count
+        description: "Number of paid orders"
+      - name: unique_buyers
+        description: "Distinct buyers on this date"
+      - name: gross_revenue
+        description: "Sum of all paid order amounts"
+      - name: net_revenue
+        description: "Gross revenue minus fraud revenue"
+      - name: avg_order_value
+        description: "Average order amount"
+
+  - name: product_performance
+    description: "Product-level GMV, return rate, and fraud breakdown."
+    columns:
+      - name: product_key
+        description: "Surrogate key (MD5 of product_id)"
+        data_tests:
+          - unique
+          - not_null
+      - name: product_id
+        description: "Product identifier"
+        data_tests:
+          - unique
+          - not_null
+      - name: gmv
+        description: "Gross Merchandise Value (sum of paid orders)"
+      - name: return_rate_pct
+        description: "Percentage of orders that were returned"
+      - name: net_revenue
+        description: "GMV minus total refunded"
+
+  - name: customer_cohorts
+    description: "Weekly cohort retention analysis. Cohort = week of first order."
+    columns:
+      - name: cohort_id
+        description: "Surrogate key"
+        data_tests:
+          - unique
+          - not_null
+      - name: cohort_week
+        description: "Week of first order (ISO week start)"
+      - name: cohort_size
+        description: "Number of users in this cohort"
+      - name: weeks_since_first
+        description: "Weeks elapsed since cohort week"
+      - name: active_users
+        description: "Users active in this week"
+      - name: retention_pct
+        description: "Percentage of cohort still active"
+
+  - name: fraud_summary
+    description: "Daily fraud stats by category and country."
+    columns:
+      - name: fraud_summary_id
+        description: "Surrogate key"
+        data_tests:
+          - unique
+          - not_null
+      - name: fraud_rate_pct
+        description: "Percentage of orders flagged as fraudulent"

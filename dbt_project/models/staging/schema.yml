@@ -1,0 +1,91 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Staged order events from the Iceberg orders table. One row per order event."
+    columns:
+      - name: order_id
+        description: "Unique order identifier (from event_id)"
+        data_tests:
+          - unique
+          - not_null
+      - name: user_id
+        description: "User who placed the order"
+        data_tests:
+          - not_null
+      - name: product_id
+        description: "Product ordered"
+        data_tests:
+          - not_null
+      - name: category
+        description: "Product category"
+        data_tests:
+          - not_null
+      - name: amount
+        description: "Order amount in EUR"
+        data_tests:
+          - not_null
+      - name: quantity
+        description: "Number of units ordered"
+        data_tests:
+          - not_null
+      - name: currency
+        description: "ISO 4217 currency code"
+      - name: country
+        description: "Buyer country (ISO 3166-1 alpha-2)"
+      - name: event_ts
+        description: "Event timestamp"
+        data_tests:
+          - not_null
+      - name: event_date
+        description: "Event date (derived from event_ts)"
+      - name: is_fraud
+        description: "Fraud flag set by downstream detection"
+      - name: late_arrival
+        description: "True if this record was replayed from quarantine as a late event"
+
+  - name: stg_payments
+    description: "Staged payment events from the Iceberg payments table."
+    columns:
+      - name: payment_id
+        description: "Unique payment identifier"
+        data_tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: "Order this payment relates to"
+        data_tests:
+          - not_null
+      - name: status
+        description: "Payment status: PENDING, SUCCESS, FAILED, REFUNDED"
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['PENDING', 'SUCCESS', 'FAILED', 'REFUNDED']
+
+  - name: stg_clicks
+    description: "Staged click events from the Iceberg clicks table."
+    columns:
+      - name: click_id
+        description: "Unique click identifier"
+        data_tests:
+          - unique
+          - not_null
+      - name: device_type
+        description: "Device type: mobile, desktop, tablet"
+        data_tests:
+          - accepted_values:
+              values: ['mobile', 'desktop', 'tablet']
+
+  - name: stg_returns
+    description: "Staged return events from the Iceberg returns table."
+    columns:
+      - name: return_id
+        description: "Unique return identifier"
+        data_tests:
+          - unique
+          - not_null
+      - name: refund_amount
+        description: "Refund amount to be issued"
+        data_tests:
+          - not_null
