@@ -15,7 +15,7 @@ dbt_project/dbt_packages/
 dbt_project/logs/
 *.duckdb
 *.duckdb.wal
-duckdb/*.db
+duckdb_layer/*.db
 quarantine_store/
 minio-data/
 .DS_Store

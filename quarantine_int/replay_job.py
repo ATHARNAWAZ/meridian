@@ -8,9 +8,9 @@ Reads quarantined records from the store and attempts to re-process them:
     a late_arrival=True flag.
 
 Run:
-    uv run python quarantine/replay_job.py
-    uv run python quarantine/replay_job.py --pipeline meridian --type LATE_ARRIVAL
-    uv run python quarantine/replay_job.py --dry-run
+    uv run python quarantine_int/replay_job.py
+    uv run python quarantine_int/replay_job.py --pipeline meridian --type LATE_ARRIVAL
+    uv run python quarantine_int/replay_job.py --dry-run
 """
 
 import argparse

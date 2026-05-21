@@ -50,3 +50,6 @@ quarantine-dq = { path = "libs/quarantine_dq", editable = true }
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"
+markers = [
+    "integration: marks tests requiring external services (kafka, flink, iceberg)",
+]

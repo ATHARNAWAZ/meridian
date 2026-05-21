@@ -81,10 +81,10 @@ format: ## Auto-format all Python files
 ## ─── Quarantine ──────────────────────────────────────────────────────────────
 
 replay: ## Replay all replayable quarantined events
-	uv run python quarantine/replay_job.py --pipeline meridian
+	uv run python quarantine_int/replay_job.py --pipeline meridian
 
 replay-dry: ## Dry-run replay (no writes)
-	uv run python quarantine/replay_job.py --pipeline meridian --dry-run
+	uv run python quarantine_int/replay_job.py --pipeline meridian --dry-run
 
 ## ─── Demo ────────────────────────────────────────────────────────────────────
 

@@ -14,7 +14,7 @@ import plotly.graph_objects as go
 import requests
 import streamlit as st
 
-from duckdb.query_layer import MeridianQueryLayer
+from duckdb_layer.query_layer import MeridianQueryLayer
 
 # ─── Page 1: Live Overview ────────────────────────────────────────────────────
 
@@ -261,7 +261,7 @@ def page_quarantine_console(ql: MeridianQueryLayer) -> None:
             with st.spinner("Running replay job..."):
                 try:
                     result = subprocess.run(
-                        ["python", "quarantine/replay_job.py", "--pipeline", "meridian"],
+                        ["python", "quarantine_int/replay_job.py", "--pipeline", "meridian"],
                         capture_output=True,
                         text=True,
                         timeout=60,

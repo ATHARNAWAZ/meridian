@@ -26,7 +26,7 @@ from dashboard.pages import (
     page_iceberg_time_travel,
     page_pipeline_health,
 )
-from duckdb.query_layer import MeridianQueryLayer
+from duckdb_layer.query_layer import MeridianQueryLayer
 
 # ─── Page config ──────────────────────────────────────────────────────────────
 

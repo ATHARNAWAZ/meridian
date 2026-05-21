@@ -3,7 +3,7 @@ meridian:
   outputs:
     dev:
       type: duckdb
-      path: "{{ env_var('MERIDIAN_DUCKDB_PATH', '../duckdb/meridian.duckdb') }}"
+      path: "{{ env_var('MERIDIAN_DUCKDB_PATH', '../duckdb_layer/meridian.duckdb') }}"
       extensions:
         - httpfs
         - iceberg

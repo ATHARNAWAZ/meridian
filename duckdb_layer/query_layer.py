@@ -64,7 +64,7 @@ class MeridianQueryLayer:
     ):
         db_path = duckdb_path or os.environ.get(
             "MERIDIAN_DUCKDB_PATH",
-            str(Path(__file__).parent / "meridian.duckdb"),
+            str(Path(__file__).parent / "meridian.duckdb"),  # duckdb_layer/meridian.duckdb
         )
         self._conn = duckdb.connect(db_path)
         self._setup_extensions(

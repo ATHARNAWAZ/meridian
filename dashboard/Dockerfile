@@ -13,9 +13,9 @@ COPY pyproject.toml .
 COPY meridian/ ./meridian/
 COPY libs/ ./libs/
 COPY dbt_project/ ./dbt_project/
-COPY duckdb/ ./duckdb/
+COPY duckdb_layer/ ./duckdb_layer/
 COPY dashboard/ ./dashboard/
-COPY quarantine/ ./quarantine/
+COPY quarantine_int/ ./quarantine_int/
 COPY iceberg/ ./iceberg/
 
 RUN uv pip install --system -e "libs/quarantine_dq"
